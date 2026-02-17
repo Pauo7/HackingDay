@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Exercici 2 — SNAKE (CSS final)
+   ========================================================================== */
+
+/* Colors i variables */
+:root{
+  --bg: #0b1224;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --cell: 24px;
+  --gap: 2px;
+  --snake: #60a5fa;
+  --food: #f87171;
+}
+
+/* Reset general */
+*{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(1200px 800px at 15% 10%, #1b2a5a, var(--bg));
+  color: var(--text);
+}
+
+/* Topbar */
+.topbar{
+  padding: 18px 20px;
+  border-bottom: 1px solid #ffffff;
+}
+.topbar h1{ margin:0 0 6px 0; font-size: 20px; }
+.topbar .sub{ margin:0; color: var(--muted); }
+
+/* Layout general */
+.layout{
+  display: grid;
+  grid-template-columns: 1fr 25%; /* <- aquí està la barra lateral */
+  gap: 14px;
+  padding: 14px;
+}
+
+/* Panels */
+.panel{
+  background: #111827;
+  border: 1px solid #ffffff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 30px #000000;
+}
+
+/* HUD (puntuació i velocitat) */
+.hud{
+  display:flex;
+  gap:14px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+.hud strong{ color: var(--text); }
+
+/* Tauler Snake */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(20, var(--cell));
+  grid-template-rows: repeat(20, var(--cell));
+  gap: var(--gap);
+  padding: 10px;
+  background: #020617;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  width: fit-content;
+  margin: 0 auto; /* centra el tauler dins la columna principal */
+}
+
+/* Cel·les */
+.cell{
+  width: var(--cell);
+  height: var(--cell);
+  background: #0b1224;
+  border: 1px solid #0b1224;
+  border-radius: 6px;
+}
+.cell.snake{ background: var(--snake); border-color: #ffffff; }
+.cell.food{ background: var(--food); border-color: #ffffff; }
+
+/* Help */
+.help{ margin-top:12px; color: var(--muted); }
+.help h2{ margin:8px 0; color: var(--text); font-size:16px; }
+.help ul{ margin:8px 0 0 18px; }
+.note{ margin-top:10px; }
+
+/* Tecles */
+kbd{
+  background: #0b1224;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 2px 6px;
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Clau secreta
+   --------------------------------------------------------------------------
+   Centrat dins del recuadre lateral, lletres espaiades
+   ========================================================================== */
+.panel.secret-key-panel{
+  display: flex;
+  flex-direction: column; /* titol i clau de dalt a baix */
+  align-items: center;    /* centra horitzontalment tot el contingut */
+  padding: 14px;
+}
+
+#secretKey{
+  display: flex;
+  justify-content: center; /* centra la clau dins del panel */
+  align-items: center;
+  gap: 4px;                /* espai entre les lletres */
+}
+
+.secret-key span {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 18px;
+}
