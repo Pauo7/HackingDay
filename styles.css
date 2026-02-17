@@ -135,3 +135,24 @@ main {
 .game-card h3 {
     margin-bottom: 15px;
 }
+
+/* Estil per la missió */
+.mission-text {
+    max-width: 800px;           /* amplada màxima per llegibilitat */
+    margin: 20px auto;          /* centrat i espai superior i inferior */
+    padding: 20px;              /* una mica d’espai interior */
+    background: rgba(255, 255, 255, 0.05);  /* fons lleugerament transparent */
+    border-left: 5px solid #38bdf8;         /* barra decorativa a l’esquerra */
+    border-radius: 10px;        /* cantonades suaus */
+    font-size: 1.1rem;          /* lleugerament més gran que text normal */
+    line-height: 1.8;           /* més espai entre línies per llegir bé */
+    text-align: justify;         /* text justificat */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* lleugera ombra per destacar */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.mission-text:hover {
+    transform: scale(1.02);                       /* efecte suau al passar el ratolí */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);      /* ombra més intensa al hover */
+}
+
