@@ -192,7 +192,7 @@ pauseBtn.addEventListener("click", ()=>{
   if(paused){
     pauseBtn.innerHTML = '<img src="replay.png" alt="Reprendre" width="24" height="24">';
 } else {
-    pauseBtn.innerHTML = '<img src="pausa.png" alt="Pausa" width="24" height="24">';
+    pauseBtn.innerHTML = '<img src="pausa2.png" alt="Pausa" width="24" height="24">';
 }
 
 });
