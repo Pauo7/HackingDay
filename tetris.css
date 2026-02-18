@@ -1,18 +1,26 @@
-
 :root{
   --bg: #0f172a;
   --text: #e5e7eb;
   --muted: #9ca3af;
-  --cell: 28px;
-  --block: #60a5fa; /* color únic intencionat */
+  --cell: 32px;
+  --block: #60a5fa;
 }
+
 *{ box-sizing: border-box; }
-body{
-  margin:0;
+
+html, body {
+  height: 100%;
+  margin: 0;
   font-family: Arial, sans-serif;
   background: radial-gradient(1200px 800px at 15% 10%, #1b2a5a, var(--bg));
   color: var(--text);
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .topbar{
   padding: 18px 20px;
   border-bottom: 1px solid #ffffff;
@@ -20,37 +28,42 @@ body{
 .topbar h1{ margin:0 0 6px 0; font-size: 20px; }
 .topbar .sub{ margin:0; color: var(--muted); }
 
-.layout{
+.layout {
   display: grid;
-  grid-template-columns: 1fr 500px;
-  gap: 14px;
-  padding: 14px;
+  grid-template-columns: 220px 1fr 220px;
+  gap: 10px;
+  height: calc(100vh - 80px); 
+  padding: 10px;
 }
-.panel{
+
+.panel {
   background: #111827;
-  border: 1px solid #ffffff;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 10px 30px #000000;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
-.hud{
-  display:flex;
-  gap: 14px;
-  color: var(--muted);
-  margin-bottom: 10px;
+
+.board-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
-.hud strong{ color: var(--text); }
-.board{
+
+.board {
   display: grid;
   grid-template-columns: repeat(10, var(--cell));
-  grid-template-rows: repeat(20, var(--cell));
+  grid-template-rows: repeat(22, var(--cell));
   gap: 2px;
-  padding: 10px;
   background: #020617;
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 12px;
-  width: fit-content;
+  margin: 0 auto;
 }
+
 .cell{
   width: var(--cell);
   height: var(--cell);
@@ -62,20 +75,6 @@ body{
   background: var(--block);
   border-color: #ffffff;
 }
-/* Classe de tipus (ja assignada pel JS). Ara mateix totes hereten el mateix color. */
-.cell.filled.tI,
-.cell.filled.tJ,
-.cell.filled.tL,
-.cell.filled.tO,
-.cell.filled.tS,
-.cell.filled.tT,
-.cell.filled.tZ{
-  background: var(--block);
-}
-
-/* TODO (ALUMNAT):
-   .cell.filled.tI{ background: #22c55e; }
-*/
 .cell.filled.tI{ background: #22c55e; }
 .cell.filled.tJ{ background: #2d1ad1; }
 .cell.filled.tL{ background: #c713be; }
@@ -84,79 +83,72 @@ body{
 .cell.filled.tT{ background: #790edd; }
 .cell.filled.tZ{ background: #f69712; }
 
-
-.help{ margin-top: 12px; color: var(--muted); }
-.help h2{ margin: 8px 0; color: var(--text); font-size: 16px; }
-.help ul{ margin: 8px 0 0 18px; }
-.note{ margin-top: 10px; }
-kbd{
-  background: #0b1224;
-  border: 1px solid #ffffff;
-  border-radius: 6px;
-  padding: 2px 6px;
-  color: var(--text);
-}
-
-.game-container {
-  display: flex;
-  flex-direction: column; /* columna: primer hud, després tauler */
-  align-items: center;    /* centra horitzontalment */
-  margin-top: 20px;       /* opcional: espai superior */
-}
-
+/* HUD */
 .hud {
   display: flex;
   gap: 14px;
   color: var(--muted);
   margin-bottom: 10px;
-  justify-content: center; /* centra el contingut dins de la hud */
-  width: 100%;             /* perquè justify-content funcioni */
+  justify-content: center;
+  width: 100%;
+}
+.hud strong{ color: var(--text); }
+#lines, #pieceName { font-size: 20px; font-weight: bold; color: var(--text); }
+
+/* Contenidor Hold */
+#holdContainer {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  width: max-content;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-#lines, #pieceName {
-  font-size: 20px;     /* opcional, més visible */
-  font-weight: bold;
-  color: var(--text);
+/* Botó pausa dins del Hold */
+#pauseBtn {
+  background-color: #111827;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
 }
+#pauseBtn img { display:block; margin:0 auto; }
 
+/* Hold i Next previews */
+#holdPreview, #next1, #next2, #next3 {
+  display: grid;
+  grid-template-columns: repeat(4, var(--cell));
+  grid-template-rows: repeat(4, var(--cell));
+  gap: 2px;
+  width: max-content;
+  margin: 5px auto;
+}
+#holdName { text-align:center; margin-top:5px; font-weight:bold; color: var(--text); }
 
-.secret-key {
+/* Clau secreta al centre dreta */
+#secretKey {
   display: flex;
   justify-content: center;
   gap: 10px;
   font-size: 28px;
   letter-spacing: 2px;
-  margin-top: 20px;
-  color: var(--muted);
+  margin-top: auto;
 }
+#secretKey span.unlocked { color: var(--text); font-weight: bold; }
+#secretKey span { color: var(--muted); }
 
-.secret-key span.unlocked {
-  color: var(--text);
-  font-weight: bold;
+/* Controls a baix a l’esquerra */
+.help {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
 }
-
-
-.secret-key span {
-  font-size: 28px;
-  margin: 0 5px;
-  color: var(--muted);
-}
-
-.secret-key span.unlocked {
-  color: var(--text);
-  font-weight: bold;
-}
-
-
-.secret-key span {
-  font-size: 24px;
-  margin: 0 3px;
-  color: var(--muted);
-}
-
-.secret-key span.unlocked {
-  color: var(--text);
-  font-weight: bold;
-}
-
-
+.help h2{ margin: 8px 0; color: var(--text); font-size: 16px; }
+.help ul{ margin: 0; padding: 0; list-style: none; }
+.help ul li { display: flex; gap: 5px; align-items: center; margin-bottom: 8px; }
+kbd { background: #0b1224; border: 1px solid #ffffff; border-radius: 6px; padding: 2px 6px; color: var(--text); }
