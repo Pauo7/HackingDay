@@ -95,29 +95,6 @@ body {
 .hud strong{ color: var(--text); }
 #lines, #pieceName { font-size: 20px; font-weight: bold; color: var(--text); }
 
-/* Contenidor Hold */
-#holdContainer {
-  position: absolute;
-  top: 80px;
-  left: 20px;
-  width: max-content;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Botó pausa dins del Hold */
-#pauseBtn {
-  background-color: #111827;
-  border: 2px solid #ffffff;
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
-}
-#pauseBtn img { display:block; margin:0 auto; }
-
 /* Hold i Next previews */
 #holdPreview, #next1, #next2, #next3 {
   display: grid;
@@ -129,26 +106,66 @@ body {
 }
 #holdName { text-align:center; margin-top:5px; font-weight:bold; color: var(--text); }
 
-/* Clau secreta al centre dreta */
+/* Clau secreta a la part inferior dreta */
+#secretKeyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+}
+#secretKeyContainer h3 {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+  color: #FFD700;
+  text-shadow: 1px 1px 3px #000;
+}
 #secretKey {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  font-size: 28px;
-  letter-spacing: 2px;
-  margin-top: auto;
+  gap: 12px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 2px 2px 6px #000;
 }
-#secretKey span.unlocked { color: var(--text); font-weight: bold; }
-#secretKey span { color: var(--muted); }
+#secretKey span.unlocked { color: #00FF00; text-shadow: 2px 2px 6px #000; }
+#secretKey span { color: #9ca3af; }
 
 /* Controls a baix a l’esquerra */
 .help {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  margin: 0;
+  margin-top: auto;
 }
 .help h2{ margin: 8px 0; color: var(--text); font-size: 16px; }
 .help ul{ margin: 0; padding: 0; list-style: none; }
 .help ul li { display: flex; gap: 5px; align-items: center; margin-bottom: 8px; }
 kbd { background: #0b1224; border: 1px solid #ffffff; border-radius: 6px; padding: 2px 6px; color: var(--text); }
+
+#holdContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* centra horitzontalment */
+  justify-content: space-between; /* espai entre Hold i controls, pause al mig */
+  height: 100%;              /* ocupa tota l’alçada del panell esquerre */
+  padding: 10px 0;
+}
+
+#pauseBtn {
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  margin: 100px 0;           /* espai superior i inferior */
+  margin-left: 60px;
+}
+
+/* Ajust de la imatge dins del botó */
+#pauseBtn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
