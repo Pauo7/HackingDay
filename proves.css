@@ -5,17 +5,20 @@ body {
   background: #0b1020;
   color: #eef2ff;
 }
+
 .container {
   max-width: 600px;
   margin: 20px auto;
   padding: 10px;
 }
+
 .card {
   background: #111a33;
   margin-bottom: 10px;
   border-radius: 12px;
   overflow: hidden;
 }
+
 .card-header {
   display: flex;
   align-items: center;
@@ -23,16 +26,37 @@ body {
   padding: 12px;
   gap: 10px;
   background: #18214a;
+  height: 100px;
 }
-.card-header:hover { background: #243055; }
+
+.card-header:hover { 
+  background: #243055; 
+}
+
+.card-header span {
+  font-size: 30px;
+}
+
 .card-header span.icon {
-  font-size: 20px;
+  font-size: 50px;
 }
+
+/* Card body plegat per defecte */
 .card-body {
   display: none;
-  padding: 12px;
+  padding: 20px;
+  min-height: 120px; /* altura mínima inicial */
   border-top: 1px solid #243055;
+  transition: all 0.3s ease;
+  opacity: 0.95;
 }
+
+/* Quan s'obre la card, es fa més gran verticalment */
+.card-body.show {
+  display: block;
+  min-height: 250px; /* altura augmentada en desplegar */
+}
+
 textarea, input[type=text] {
   width: 100%;
   font-family: monospace;
@@ -43,8 +67,9 @@ textarea, input[type=text] {
   border: 1px solid #243055;
   background: #111a33;
   color: #eef2ff;
-  min-height: 80px;
+  min-height: 100px;
 }
+
 button {
   padding: 8px 12px;
   border-radius: 8px;
@@ -53,14 +78,24 @@ button {
   background: #1dd1a1;
   color: #0b1020;
 }
+
 .result {
   margin-top: 6px;
   padding: 6px;
   border-radius: 8px;
   font-weight: bold;
 }
-.result.ok { background: #1dd1a1; color: #0b1020; }
-.result.bad { background: #ff6b6b; color: #0b1020; }
+
+.result.ok { 
+  background: #1dd1a1; 
+  color: #0b1020; 
+}
+
+.result.bad { 
+  background: #ff6b6b; 
+  color: #0b1020; 
+}
+
 iframe {
   width: 100%;
   height: 150px;
