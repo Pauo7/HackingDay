@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Proves: HTML, CSS i JS</title>
+<link rel="stylesheet" href="proves.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Prova 1: HTML -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="icon">🌐</span>
+      <span>Prova 1: HTML</span>
+    </div>
+    <div class="card-body">
+      <p>Escriu un <code>&lt;p&gt;</code> amb el text "Hola món".</p>
+      <textarea id="htmlCode"></textarea>
+      <button onclick="checkHTML()">Comprova</button>
+      <div id="htmlResult" class="result"></div>
+      <iframe id="htmlPreview"></iframe>
+    </div>
+  </div>
+
+  <!-- Prova 2: CSS -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="icon">🎨</span>
+      <span>Prova 2: CSS</span>
+    </div>
+    <div class="card-body">
+      <p>Fes que tots els <code>&lt;p&gt;</code> tinguin color vermell.</p>
+      <textarea id="cssCode"></textarea>
+      <button onclick="checkCSS()">Comprova</button>
+      <div id="cssResult" class="result"></div>
+      <iframe id="cssPreview"></iframe>
+    </div>
+  </div>
+
+  <!-- Prova 3: JavaScript -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="icon">💻</span>
+      <span>Prova 3: JavaScript</span>
+    </div>
+    <div class="card-body">
+      <p>Escriu una funció que sumi dos nombres i retorna el resultat.</p>
+      <textarea id="jsCode">function </textarea>
+      <button onclick="checkJS()">Comprova</button>
+      <div id="jsResult" class="result"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="proves.js"></script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 "use strict";
 
 window.onload = () => {
-  /* --- CONSTANTS I ELEMENTS --- */
   const COLS = 10, ROWS = 22;
   const boardEl = document.getElementById("board");
   const linesEl = document.getElementById("lines");
@@ -29,7 +28,6 @@ window.onload = () => {
     { name: "Z", cls: "tZ", blocks: [[0,0],[1,0],[1,1],[2,1]] },
   ];
 
-  /* --- ESTAT --- */
   let board = Array.from({length:ROWS},()=>Array(COLS).fill(null));
   let current = createPiece();
   let next1 = createPiece();
@@ -42,7 +40,6 @@ window.onload = () => {
   let tick = null;
   let paused = false;
 
-  /* --- FUNCIONS --- */
   function createPiece(){
     const t = TETROMINOS[Math.floor(Math.random()*TETROMINOS.length)];
     return { name:t.name, cls:t.cls, x:3, y:0, blocks:t.blocks.map(b=>[b[0],b[1]]) };
@@ -121,7 +118,6 @@ window.onload = () => {
     return temp;
   }
 
-  /* --- RENDER --- */
   function render(){
     boardEl.innerHTML="";
     for(let r=0;r<ROWS;r++){
@@ -187,7 +183,6 @@ window.onload = () => {
     spans.forEach((s,i)=>{ if(lines>=i+1){ s.textContent=secret[i]; s.classList.add("unlocked"); } });
   }
 
-  /* --- CONTROLS --- */
   document.addEventListener("keydown", e=>{
     if(paused) return;
     if(e.key==="ArrowUp"){ const rotated=rotateBlocks(current.blocks); if(canMove(current,0,0,rotated)){ current.blocks=rotated; render(); } }
@@ -197,12 +192,8 @@ window.onload = () => {
     if(e.key==="c" || e.key==="C"){ holdPiece(); }
   });
 
-  /* --- START/STOP --- */
   function start(){ tick=setInterval(step,speed); render(); renderNext(); renderHold(); }
   function stop(){ if(tick){ clearInterval(tick); tick=null; } }
 
-  
-
-  /* --- START --- */
   start();
 };
