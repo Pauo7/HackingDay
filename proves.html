@@ -6,6 +6,7 @@
 <title>Mini Proves: HTML, CSS i JS</title>
 <link rel="stylesheet" href="proves.css">
 </head>
+<canvas id="matrixCanvas"></canvas>
 <body>
 
 <div class="container">
@@ -47,12 +48,27 @@
       <span>Prova 3: JavaScript</span>
     </div>
     <div class="card-body">
-      <p>Escriu una funció que sumi dos nombres i retorna el resultat.</p>
+      <p>Escriu una funció que sumi dos nombres i retorna el resultat. Teniu 3 intents</p>
       <textarea id="jsCode">function </textarea>
       <button onclick="checkJS()">Comprova</button>
       <div id="jsResult" class="result"></div>
     </div>
   </div>
+
+
+<!-- Prova 4: LINUX -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this, 4)">
+    <span class="icon">🐧</span>
+    <span>Prova 4: LINUX</span>
+  </div>
+  <div class="card-body">
+    <p>Introdueix la comanda per llistar els arxius d'una carpeta.</p>
+    <textarea id="linuxCode"></textarea>
+    <button onclick="checkLinux()">Comprova</button>
+    <div id="linuxResult" class="result"></div>
+  </div>
+</div>
 
 </div>
 

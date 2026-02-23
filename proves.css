@@ -4,6 +4,7 @@ body {
   padding: 0;
   background: #0b1020;
   color: #eef2ff;
+  transition: 0.3s ease;
 }
 
 .container {
@@ -17,6 +18,7 @@ body {
   margin-bottom: 10px;
   border-radius: 12px;
   overflow: hidden;
+  transition: 0.3s ease;
 }
 
 .card-header {
@@ -27,6 +29,7 @@ body {
   gap: 10px;
   background: #18214a;
   height: 100px;
+  transition: 0.3s ease;
 }
 
 .card-header:hover { 
@@ -41,20 +44,18 @@ body {
   font-size: 50px;
 }
 
-/* Card body plegat per defecte */
 .card-body {
   display: none;
   padding: 20px;
-  min-height: 120px; /* altura mínima inicial */
+  min-height: 120px;
   border-top: 1px solid #243055;
   transition: all 0.3s ease;
   opacity: 0.95;
 }
 
-/* Quan s'obre la card, es fa més gran verticalment */
 .card-body.show {
   display: block;
-  min-height: 250px; /* altura augmentada en desplegar */
+  min-height: 250px;
 }
 
 textarea, input[type=text] {
@@ -68,6 +69,7 @@ textarea, input[type=text] {
   background: #111a33;
   color: #eef2ff;
   min-height: 100px;
+  transition: 0.3s ease;
 }
 
 button {
@@ -77,6 +79,11 @@ button {
   cursor: pointer;
   background: #1dd1a1;
   color: #0b1020;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 .result {
@@ -103,4 +110,108 @@ iframe {
   border: 1px solid #243055;
   background: white;
   margin-bottom: 6px;
+}
+
+/* ========================= */
+/* ===== MATRIX CANVAS ===== */
+/* ========================= */
+
+#matrixCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: none;
+}
+
+/* ========================= */
+/* ===== LINUX MODE ======== */
+/* ========================= */
+
+body.linux-mode {
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+body.linux-mode #matrixCanvas {
+  display: block;
+}
+
+body.linux-mode .card {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+body.linux-mode .card-header {
+  background: #001100;
+}
+
+body.linux-mode textarea {
+  background: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  caret-color: #00ff00;
+}
+
+body.linux-mode button {
+  background: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+}
+
+body.linux-mode button:hover {
+  background: #003300;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+body.linux-mode .result.ok {
+  background: #003300;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+body.linux-mode .result.bad {
+  background: #330000;
+  color: #ff4444;
+}
+
+/* ========================= */
+/* ===== GLITCH EFFECT ===== */
+/* ========================= */
+
+@keyframes glitchFlash {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-2deg); }
+  40% { transform: skew(2deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(1deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes glitchOverlay {
+  0% { opacity: 0; }
+  50% { opacity: 0.08; }
+  100% { opacity: 0; }
+}
+
+body.glitch {
+  animation: glitchFlash 0.15s linear;
+}
+
+body.glitch::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00ff00;
+  mix-blend-mode: overlay;
+  animation: glitchOverlay 0.15s linear;
+  pointer-events: none;
 }
