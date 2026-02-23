@@ -1,8 +1,7 @@
 "use strict";
 
-/* --- CONSTANTS ----------------------------------------------------------- */
 const SIZE = 20;
-const SPEED_INCREMENT = 10; // cada 2 pomes, reduïm l'interval en 10ms
+const SPEED_INCREMENT = 10; 
 const SKINS = {
   default: "#60a5fa",
   green: "#10b981",
@@ -10,15 +9,13 @@ const SKINS = {
 };
 const SECRET = "192.16";
 
-/* --- ELEMENTS DEL DOM ---------------------------------------------------- */
 const gridEl = document.getElementById("grid");
 const scoreEl = document.getElementById("score");
 const speedEl = document.getElementById("speed");
 const secretEl = document.getElementById("secret-key");
 
-/* --- ESTAT DEL JOC ------------------------------------------------------- */
-let direction = { x: 1, y: 0 }; // inicialment cap a la dreta
-let nextDirection = { ...direction }; // per evitar doble moviment
+let direction = { x: 1, y: 0 }; 
+let nextDirection = { ...direction }; 
 let snake = [
   { x: 9, y: 10 },
   { x: 8, y: 10 },
@@ -28,13 +25,8 @@ let food = null;
 let score = 0;
 let speedMs = 200;
 let tick = null;
-let skin = SKINS.default; // skin de la serp
+let skin = SKINS.default; 
 
-/* ========================================================================== */
-/* -------------------------- FUNCIONS D'AJUDA ----------------------------- */
-/* ========================================================================== */
-
-/** Crea el tauler visual 20x20 */
 function initGridDOM() {
   gridEl.innerHTML = "";
   for (let y = 0; y < SIZE; y++) {
@@ -48,34 +40,28 @@ function initGridDOM() {
   }
 }
 
-/** Retorna true si (x,y) és dins del tauler */
 function inBounds(x, y) {
   return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
 }
 
-/** Compara dues posicions {x,y} */
 function samePos(a, b) {
   return a.x === b.x && a.y === b.y;
 }
 
-/** Dibuixa la serp i el menjar */
 function render() {
   const cells = gridEl.querySelectorAll(".cell");
 
-  // neteja totes les cel·les
   cells.forEach(cell => {
     cell.className = "cell";
-    cell.style.backgroundColor = "#0b1224"; // reset
+    cell.style.backgroundColor = "#0b1224"; 
   });
 
-  // pinta la serp amb la skin
   snake.forEach(part => {
     const idx = part.y * SIZE + part.x;
     cells[idx].classList.add("snake");
     cells[idx].style.backgroundColor = skin;
   });
 
-  // pinta el menjar
   if (food !== null) {
     const idx = food.y * SIZE + food.x;
     cells[idx].classList.add("food");
@@ -83,11 +69,6 @@ function render() {
   }
 }
 
-/* ========================================================================== */
-/* ----------------------------- LÒGICA DEL JOC ----------------------------- */
-/* ========================================================================== */
-
-/** Col·loca menjar aleatori dins del tauler (sense sobreposar-se a la serp) */
 function placeFood() {
   let valid = false;
   while (!valid) {
@@ -99,114 +80,90 @@ function placeFood() {
   }
 }
 
-/** Actualitza la clau secreta mostrant les primeres N lletres */
 function updateSecret(score) {
-  const lettersToShow = Math.floor(score / 5); // 1 lletra per cada 5 pomes
+  const lettersToShow = Math.floor(score / 3); 
   const spans = document.querySelectorAll("#secretKey span");
   spans.forEach((span, i) => {
     if (i < lettersToShow) {
-      span.textContent = SECRET[i]; // mostra la lletra
+      span.textContent = SECRET[i]; 
     } else {
-      span.textContent = "_"; // encara bloquejada
+      span.textContent = "_"; 
     }
   });
 }
 
-
-/** Un pas del joc: mou la serp, comprova col·lisions i menjar */
 function step() {
-  // actualitza la direcció amb la propera (aplicant gir)
+
   direction = { ...nextDirection };
 
   const head = snake[0];
   const next = { x: head.x + direction.x, y: head.y + direction.y };
 
-  // col·lisió amb paret
   if (!inBounds(next.x, next.y)) {
     gameOver();
     return;
   }
 
-  // col·lisió amb el propi cos
   if (snake.some(part => samePos(part, next))) {
     gameOver();
     return;
   }
 
-  // afegim el nou cap
   snake.unshift(next);
 
-  // si ha menjat
   if (food !== null && samePos(next, food)) {
     score++;
     scoreEl.textContent = score;
-    placeFood(); // generar nou menjar
+    placeFood();
 
-    // augmentar velocitat cada 2 pomes
     if (score % 2 === 0) {
-      speedMs = Math.max(120, speedMs - SPEED_INCREMENT); // no deixar <50ms
+      speedMs = Math.max(120, speedMs - SPEED_INCREMENT); 
       speedEl.textContent = speedMs;
 
-      // reinicia l'interval amb la nova velocitat
       if (tick) {
         clearInterval(tick);
         tick = setInterval(step, speedMs);
       }
     }
 
-    // **actualitzar clau secreta**
     updateSecret(score);
 
   } else {
-    // no ha menjat → eliminar la cua
+
     snake.pop();
   }
 
   render();
 }
 
-/** Arrenca el joc */
 function start() {
   initGridDOM();
   scoreEl.textContent = score;
   speedEl.textContent = speedMs;
-  updateSecret(score); // inicialitza la clau secreta
+  updateSecret(score); 
 
-  placeFood(); // inicialitzar menjar
+  placeFood();
   render();
 
   tick = setInterval(step, speedMs);
 }
 
-/** Finalitza la partida */
 function gameOver() {
   if (tick) clearInterval(tick);
   tick = null;
   alert("Game Over");
 }
 
-/* ========================================================================== */
-/* ---------------------------- CONTROLS DE TECLAT ------------------------- */
-/* ========================================================================== */
 document.addEventListener("keydown", function (e) {
-  // **No permet girar 180º**
+
   if (e.key === "ArrowUp" && direction.y !== 1) nextDirection = { x: 0, y: -1 };
   if (e.key === "ArrowDown" && direction.y !== -1) nextDirection = { x: 0, y: 1 };
   if (e.key === "ArrowLeft" && direction.x !== 1) nextDirection = { x: -1, y: 0 };
   if (e.key === "ArrowRight" && direction.x !== -1) nextDirection = { x: 1, y: 0 };
 });
 
-/* ========================================================================== */
-/* ---------------------------- FUNCIONS ADDICIONALS ----------------------- */
-/* ========================================================================== */
-
-/** Canvia la skin de la serp */
 function setSnakeSkin(colorName) {
   if (SKINS[colorName]) skin = SKINS[colorName];
 }
 
-/* --- INICI --------------------------------------------------------------- */
 start();
-
-// Exemple: canviar la skin a verda
-// setSnakeSkin("green");
