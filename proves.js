@@ -7,10 +7,6 @@ const jsMaxAttempts = 3;
 
 let matrixInterval;
 
-// ===============================
-// TOGGLE CARDS
-// ===============================
-
 function toggleCard(header, provaNum) {
 
   if(provaNum === 2 && !htmlCorrect){
@@ -23,7 +19,6 @@ function toggleCard(header, provaNum) {
     return;
   }
 
-  // BLOQUEIG PER LINUX fins completar JS
   if(provaNum === 4 && !jsCorrect){
     alert('Has de completar correctament la Prova 3 abans de poder accedir a Linux.');
     return;
@@ -42,10 +37,6 @@ function toggleCard(header, provaNum) {
     }
   }
 }
-
-// ===============================
-// HTML
-// ===============================
 
 function checkHTML(){
   const code = document.getElementById('htmlCode').value.trim();
@@ -68,10 +59,6 @@ function checkHTML(){
   }
 }
 
-// ===============================
-// CSS
-// ===============================
-
 function checkCSS(){
   const code = document.getElementById('cssCode').value.trim();
   if(!code){
@@ -80,7 +67,7 @@ function checkCSS(){
   }
 
   const iframe = document.getElementById('cssPreview');
-  iframe.srcdoc = '<p>Hola món</p><style>' + code + '</style>';
+  iframe.srcdoc = '<p style="color:red">Hola món</p><style>' + code + '</style>';
 
   if(code.includes('color: red')){
     document.getElementById('cssResult').textContent = 'Correcte!';
@@ -92,10 +79,6 @@ function checkCSS(){
     cssCorrect = false;
   }
 }
-
-// ===============================
-// JS
-// ===============================
 
 function checkJS(){
   const code = document.getElementById('jsCode').value.trim();
@@ -113,11 +96,11 @@ function checkJS(){
       document.getElementById('jsResult').textContent = 'Correcte!';
       document.getElementById('jsResult').className = 'result ok';
       jsCorrect = true;
-      jsAttempts = 0; // reset
+      jsAttempts = 0;
     } else {
       jsAttempts++;
       if(jsAttempts >= jsMaxAttempts){
-        // Mostrar la resposta correcta
+
         document.getElementById('jsCode').value = 'function sum(a,b){ return a+b; }';
         document.getElementById('jsResult').textContent = 'Aquí tens la resposta!';
         document.getElementById('jsResult').className = 'result ok';
@@ -146,10 +129,6 @@ function checkJS(){
   }
 }
 
-// ===============================
-// LINUX
-// ===============================
-
 function checkLinux(){
   const code = document.getElementById('linuxCode').value.trim();
 
@@ -168,10 +147,6 @@ function checkLinux(){
     linuxCorrect = false;
   }
 }
-
-// ===============================
-// MATRIX EFFECT
-// ===============================
 
 function startMatrix() {
   const canvas = document.getElementById("matrixCanvas");
@@ -215,10 +190,6 @@ function stopMatrix() {
   clearInterval(matrixInterval);
 }
 
-// ===============================
-// GLITCH ON KEY PRESS (LINUX)
-// ===============================
-
 const linuxInput = document.getElementById("linuxCode");
 
 linuxInput.addEventListener("keydown", function() {
@@ -234,3 +205,4 @@ linuxInput.addEventListener("keydown", function() {
   }
 
 });
+
