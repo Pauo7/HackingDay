@@ -3,7 +3,7 @@ let cssCorrect = false;
 let jsCorrect = false;
 let linuxCorrect = false;
 let jsAttempts = 0;
-const jsMaxAttempts = 3;
+const jsMaxAttempts = 5;
 
 let matrixInterval;
 
@@ -97,7 +97,7 @@ function checkJS(){
       document.getElementById('jsResult').className = 'result ok';
       jsCorrect = true;
       jsAttempts = 0;
-    } else {
+    } else {f
       jsAttempts++;
       if(jsAttempts >= jsMaxAttempts){
 
