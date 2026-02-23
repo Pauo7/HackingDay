@@ -53,7 +53,7 @@ function checkHTML(){
     document.getElementById('htmlResult').className = 'result ok';
     htmlCorrect = true;
   } else {
-    document.getElementById('htmlResult').textContent = 'Incorrecte';
+    document.getElementById('htmlResult').textContent = 'Incorrecte, pista: vigila com tenques el </p>';
     document.getElementById('htmlResult').className = 'result bad';
     htmlCorrect = false;
   }
@@ -74,7 +74,7 @@ function checkCSS(){
     document.getElementById('cssResult').className = 'result ok';
     cssCorrect = true;
   } else {
-    document.getElementById('cssResult').textContent = 'Incorrecte';
+    document.getElementById('cssResult').textContent = 'Incorrecte, pista: "color:"';
     document.getElementById('cssResult').className = 'result bad';
     cssCorrect = false;
   }
